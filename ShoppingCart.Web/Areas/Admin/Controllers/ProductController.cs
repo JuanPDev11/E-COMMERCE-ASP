@@ -40,19 +40,6 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public IActionResult Create(Product product)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _unitOfWork.Product.Add(product);
-        //        _unitOfWork.Save();
-        //        TempData["success"] = "Product Created Done!";
-        //        return RedirectToAction("Index");
-        //    }
-        //    return View(product);
-        //}
 
         [HttpGet]
         public IActionResult CreateUpdate(int? id ) 
@@ -134,20 +121,7 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]
-        //public IActionResult Delete(int? id)
-        //{
-        //    if(id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var category = _unitOfWork.Category.GetT(x=> x.Id == id);
-        //    if(category == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(category);
-        //}
+       
 
         #region DeleteAPICALL
         [HttpDelete]
