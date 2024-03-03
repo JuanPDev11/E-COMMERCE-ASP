@@ -21,7 +21,7 @@ $(document).ready(function () {
 function RemoveProduct(url)
 {
     Swal.fire({
-        title: 'AreYou Sure?',
+        title: '¿AreYou Sure?',
         text: "You won't be able to revert this!",
         icon: 'warning',
         showCancelButton: true,
