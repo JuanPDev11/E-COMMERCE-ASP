@@ -14,11 +14,19 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
             _unitOfWork = unitOfWork;
         }
 
+        #region APICALL
+        [HttpGet]
+        public ActionResult AllCategories()
+        {
+            CategoryVM vm = new CategoryVM();
+            vm.categories = _unitOfWork.Category.GetAll();
+            return Json(new { data = vm.categories });
+        }
+        #endregion
+
         public IActionResult Index()
         {
-            CategoryVM categoryVM = new CategoryVM();
-            categoryVM.categories = _unitOfWork.Category.GetAll();
-            return View(categoryVM);
+            return View();
         }
 
         //CREATE & UPDATE GET
@@ -71,39 +79,24 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
 
         //DELETE GET
 
-        [HttpGet]
-        public IActionResult Delete(int? id) 
+        #region APIDELETE
+        [HttpDelete]
+        public IActionResult Delete(int? id)
         {
-            if(id == null || id == 0)
+            CategoryVM vm = new CategoryVM();
+            vm.Category = _unitOfWork.Category.GetT(x => x.Id == id);
+            if (vm.Category == null)
             {
-                return NotFound();
+                return Json(new { success = false, message = "Error With Petition" });
             }
-            
-            var category = _unitOfWork.Category.GetT(x => x.Id == id);
-
-            if(category == null)
+            else
             {
-                return NotFound();
+                _unitOfWork.Category.Delete(vm.Category);
+                _unitOfWork.Save();
+                return Json(new { success = true, message = "All OK" });
             }
-
-            return View(category);
         }
-
-        //DELETE POST
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteData(int? id) 
-        {
-            var category = _unitOfWork.Category.GetT(x => x.Id == id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            _unitOfWork.Category.Delete(category);
-            _unitOfWork.Save();
-            TempData["success"] = "Category Delete Done!";
-            return RedirectToAction("Index");
-        }
+        #endregion
 
     }
 }
