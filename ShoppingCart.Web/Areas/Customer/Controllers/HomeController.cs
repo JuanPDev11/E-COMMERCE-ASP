@@ -39,6 +39,32 @@ namespace ShoppingCart.Web.Controllers
             return View(cart);
         }
 
+        //[HttpPost]
+        //[Authorize]
+        //[ValidateAntiForgeryToken]
+        //public IActionResult Details(Cart cart)
+        //{
+        //    var claimsIdentity = (ClaimsIdentity)User.Identity;
+        //    var claims = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+        //    cart.ApplicationUserId = claims.Value;
+
+        //    var cartItem = _unitOfWork.Cart.GetT(x =>
+        //        x.ProductId == cart.ProductID && x.ApplicationUserId == claims.Value);
+        //    if (cartItem == null)
+        //    {
+        //        _unitOfWork.Cart.Add(cart);
+        //        _unitOfWork.Save();
+        //        HttpContext.Session.SetInt32("SessionCart", _unitOfWork.Cart.GetAll(x =>
+        //            x.ApplicationUserId == claims.Value).ToList().Count);
+        //    }
+        //    else
+        //    {
+        //        _unitOfWork.Cart.IncrementCartItem(cartItem, cart.Count);
+        //        _unitOfWork.Save();
+        //    }
+        //    return RedirectToAction("Index");
+        //}
+
 
 
         public IActionResult Privacy()
