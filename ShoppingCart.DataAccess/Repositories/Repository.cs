@@ -63,7 +63,7 @@ namespace ShoppingCart.DataAccess.Repositories
             {
                 foreach(var item in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query.Include(item);
+                    query = query.Include(item);
                 }
             }
             return query.FirstOrDefault();

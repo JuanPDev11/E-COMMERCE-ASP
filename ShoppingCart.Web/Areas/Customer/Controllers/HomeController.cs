@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.DataAccess.Repositories;
 using ShoppingCart.Models;
 using System.Diagnostics;
+using System.Security.Claims;
 
 namespace ShoppingCart.Web.Controllers
 {
@@ -22,6 +24,22 @@ namespace ShoppingCart.Web.Controllers
             IEnumerable<Product> products = _unitOfWork.Product.GetAll(includeProperties: "Category");
             return View(products);
         }
+
+        [HttpGet]
+        public IActionResult Details(int? ProductId) 
+        {
+            //if (ProductId == null) { return NotFound(); }
+            Cart cart = new Cart()
+            {
+                Product = _unitOfWork.Product.GetT(x=>x.Id == ProductId,
+                includeProperties : "Category"),
+                Count = 1,
+                ProductID = (int)ProductId
+            };
+            return View(cart);
+        }
+
+
 
         public IActionResult Privacy()
         {
