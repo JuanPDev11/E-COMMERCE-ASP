@@ -1,4 +1,4 @@
-﻿@model ShoppingCart.DataAccess.ViewModels.CategoryVM
+﻿
 
 @{
     ViewData["Title"] = "Index";
@@ -20,7 +20,7 @@
 </div>
 
 
-<table class="table table-bordered table-striped" style="width:100%">
+<table id="myTableC" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th>Name</th>
@@ -28,17 +28,8 @@
             <th>Action</th>
         </tr>
     </thead>
-    <tbody>
-    @foreach (var item in Model.categories) 
-    {
-        <tr>
-            <td>@item.Name</td>
-            <td>@item.DisplayOrder</td>
-            <td role="group">
-                <a asp-action="CreateUpdate" asp-controller="category" asp-route-id="@item.Id"><i class="bi bi-pencil-square"></i></a>
-                <a asp-action="Delete" asp-controller="Category" asp-route-id="@item.Id"><i class="bi bi-trash"></i></a>
-            </td>
-        </tr>
-    }
-    </tbody>
 </table>
+
+@section scripts {
+    <script src="~/js/Category.js"></script>
+}
