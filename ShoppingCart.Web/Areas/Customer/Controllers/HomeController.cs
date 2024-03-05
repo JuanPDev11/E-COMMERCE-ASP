@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ShoppingCart.DataAccess.Repositories;
+using ShoppingCart.DataAccess.Repositories.IRepositories;
 using ShoppingCart.Models;
 using System.Diagnostics;
 using System.Security.Claims;

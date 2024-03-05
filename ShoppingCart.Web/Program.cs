@@ -4,6 +4,8 @@ using ShoppingCart.DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using ShoppingCart.Utility.DbInitializer;
 using ShoppingCart.DataAccess.Repositories.IRepositories;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using ShoppingCart.Utility;
 
 var builder = WebApplication.CreateBuilder(args);
   
@@ -16,10 +18,13 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddIdentity<IdentityUser,IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+builder.Services.AddIdentity<IdentityUser,IdentityRole>()
+    .AddDefaultTokenProviders()
+    .AddEntityFrameworkStores<ApplicationDbContext>();
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDbInitializer,DbInitializerRepo>();
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 
 builder.Services.AddRazorPages();
 
