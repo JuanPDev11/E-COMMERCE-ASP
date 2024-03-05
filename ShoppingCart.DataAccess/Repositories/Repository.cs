@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShoppingCart.DataAccess.Data;
+using ShoppingCart.DataAccess.Repositories.IRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;

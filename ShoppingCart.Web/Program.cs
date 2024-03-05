@@ -3,6 +3,7 @@ using ShoppingCart.DataAccess.Data;
 using ShoppingCart.DataAccess.Repositories;
 using Microsoft.AspNetCore.Identity;
 using ShoppingCart.Utility.DbInitializer;
+using ShoppingCart.DataAccess.Repositories.IRepositories;
 
 var builder = WebApplication.CreateBuilder(args);
   
