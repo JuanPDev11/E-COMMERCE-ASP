@@ -26,6 +26,13 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<IDbInitializer,DbInitializerRepo>();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
+builder.Services.ConfigureApplicationCookie(opt =>
+{
+    opt.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+    opt.LoginPath = $"/Identity/Account/Login" ;
+    opt.LogoutPath = $"/Identity/Account/Logout";
+});
+
 builder.Services.AddRazorPages();
 
 var app = builder.Build();

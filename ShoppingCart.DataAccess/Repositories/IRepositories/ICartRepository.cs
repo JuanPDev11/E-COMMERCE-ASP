@@ -9,6 +9,7 @@ namespace ShoppingCart.DataAccess.Repositories.IRepositories
 {
     public interface ICartRepository : IRepository<Cart>
     {
-        void Update(Cart cart);
+        int IncrementCount(Cart cart, int count);
+        int DecrementCount(Cart cart, int count);
     }
 }

@@ -16,17 +16,17 @@ namespace ShoppingCart.DataAccess.Repositories
         {
             _context = context;
         }
-        public void Update(Cart cart)
+
+        public int DecrementCount(Cart cart, int count)
         {
-            _context.Carts.Update(cart);
-            //var cartDB = _context.Carts.FirstOrDefault(x=> x.Id == cart.Id);
-            //if (cartDB != null) 
-            //{
-            //    cartDB.Product = cart.Product;
-            //    cartDB.ApplicationUserId = cart.ApplicationUserId;
-            //    cartDB.Count = cart.Count;
-            //    cartDB.ProductID = cart.ProductID;
-            //}
+            cart.Count -= count;
+            return cart.Count;
+        }
+
+        public int IncrementCount(Cart cart, int count)
+        {
+            cart.Count += count;
+            return cart.Count;
         }
     }
 }
