@@ -6,6 +6,7 @@ using ShoppingCart.Utility.DbInitializer;
 using ShoppingCart.DataAccess.Repositories.IRepositories;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using ShoppingCart.Utility;
+using Stripe;
 
 var builder = WebApplication.CreateBuilder(args);
   
@@ -18,6 +19,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
+//STRIPE
+builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("PaymentSettings"));
 builder.Services.AddIdentity<IdentityUser,IdentityRole>()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -31,6 +34,12 @@ builder.Services.ConfigureApplicationCookie(opt =>
     opt.AccessDeniedPath = $"/Identity/Account/AccessDenied";
     opt.LoginPath = $"/Identity/Account/Login" ;
     opt.LogoutPath = $"/Identity/Account/Logout";
+});
+
+builder.Services.AddSession(opt => {
+    opt.IdleTimeout = TimeSpan.FromMinutes(100);
+    opt.Cookie.HttpOnly = true ;
+    opt.Cookie.IsEssential = true ;
 });
 
 builder.Services.AddRazorPages();
@@ -47,9 +56,10 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
+app.UseSession();
 app.UseRouting();
 dataSedding();
+StripeConfiguration.ApiKey = builder.Configuration.GetSection("PaymentSettings:SecretKey").Get<string>();
 app.UseAuthentication();;
 app.UseAuthorization();
 app.MapRazorPages();

@@ -54,14 +54,14 @@ namespace ShoppingCart.Web.Controllers
             {
                 _unitOfWork.Cart.Add(cart);
                 _unitOfWork.Save();
-                //HttpContext.Session.SetInt32("SessionCart", _unitOfWork.Cart.GetAll(x =>
-                //    x.ApplicationUserId == claims.Value).ToList().Count);
+                HttpContext.Session.SetInt32("SessionCart", _unitOfWork.Cart.GetAll(x =>
+                    x.ApplicationUserId == claims.Value).ToList().Count);
             }
-            //else
-            //{
-            //    _unitOfWork.Cart.IncrementCount(cartItem, cart.Count);
-            //    _unitOfWork.Save();
-            //}
+            else
+            {
+                _unitOfWork.Cart.IncrementCount(cartItem, cart.Count);
+                _unitOfWork.Save();
+            }
             return RedirectToAction("Index");
         }
 
