@@ -1,0 +1,28 @@
+﻿
+<div class="container p-4">
+    <div class="row p-3">
+        <div class="col-6">
+            <h2 class="text-primary">LIST of Orders</h2>
+        </div>
+        <div>
+            <a asp-controller="Orders" asp-action="Index" asp-route-status="pending">Pending</a>
+            <a asp-controller="Orders" asp-action="Index" asp-route-status="approved">Approved</a>
+            <a asp-controller="Orders" asp-action="Index" asp-route-status="underprocess">Under Process</a>
+            <a asp-controller="Orders" asp-action="Index" asp-route-status="shipped">Shipped</a>
+            <a asp-controller="Orders" asp-action="Index" asp-route-status="all">All</a>
+        </div>
+    </div>
+</div>
+<table id="miTableO" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Order Status</th>
+            <th>Order Total</th>
+            <th> Action</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts{
+    <script src="~/js/Order.js"></script>
+}
