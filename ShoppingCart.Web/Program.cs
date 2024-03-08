@@ -21,6 +21,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(opt =>
 
 //STRIPE
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("PaymentSettings"));
+
 builder.Services.AddIdentity<IdentityUser,IdentityRole>()
     .AddDefaultTokenProviders()
     .AddEntityFrameworkStores<ApplicationDbContext>();
