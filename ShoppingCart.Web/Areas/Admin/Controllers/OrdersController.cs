@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ShoppingCart.DataAccess.Data;
 using ShoppingCart.DataAccess.Repositories.IRepositories;
+using ShoppingCart.DataAccess.ViewModels;
 using ShoppingCart.Models;
 using ShoppingCart.Utility;
 using System.Security.Claims;
@@ -65,6 +66,18 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult OrderDetails(int id)
+        {
+            OrderVM orderVM = new OrderVM()
+            {
+                OrderHeader = _unitOfWork.OrderHeader.GetT(x=>x.Id ==  id,includeProperties:"ApplicationUser"),
+                OrderDetail = _unitOfWork.OrderDetail.GetAll(x => x.OrderHeaderId == id,includeProperties:"Product")
+            };
+
+            return View(orderVM);
         }
     }
 }
