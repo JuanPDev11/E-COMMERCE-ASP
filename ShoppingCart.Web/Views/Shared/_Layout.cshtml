@@ -32,28 +32,21 @@
                                 </font><span class="visually-hidden"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">(actual)</font></font></span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Category"><font style="vertical-align: inherit;">Categories</font></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Product"><font style="vertical-align: inherit;">Products</font></a>
-                        </li>
-                        @if (httpContext.HttpContext.Session.GetInt32("SessionCart") != null)
+                        @if (User.IsInRole("Admin"))
                         {
                             <li class="nav-item">
-                                <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                    <i class="bi bi-cart"></i>(@httpContext.HttpContext.Session.GetInt32("SessionCart"))
-                                </a>
+                                <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Category"><font style="vertical-align: inherit;">Categories</font></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Product"><font style="vertical-align: inherit;">Products</font></a>
                             </li>
                         }
-                        else
-                        {
-                            <li class="nav-item" >
-                                <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
-                                    <i class="bi bi-cart"></i>(0)
-                                </a>
-                            </li>
-                        }
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                @await Component.InvokeAsync("Cart")
+                            </a>
+                        </li>
+                        
                         <li class="nav-item">
                             <a class="nav-link" asp-area="Admin" asp-action="Index" asp-controller="Orders"><font style="vertical-align: inherit;">Orders</font></a>
                         </li>
