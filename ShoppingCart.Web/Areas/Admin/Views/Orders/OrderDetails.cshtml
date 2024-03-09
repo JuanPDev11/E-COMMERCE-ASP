@@ -97,7 +97,7 @@
                     @if (User.IsInRole(WebSiteRole.Role_Admin) || User.IsInRole(WebSiteRole.Role_Admin))
                     {
                         <label asp-for="OrderHeader.TrackingNumber">Tracking</label>
-                        <input asp-for="OrderHeader.TrackingNumber" class="form-control" />                     
+                        <input id="OrderHeader_TrackingNumber" asp-for="OrderHeader.TrackingNumber" class="form-control" />
                     }
                     else
                     {
@@ -109,7 +109,7 @@
                     @if (User.IsInRole(WebSiteRole.Role_Admin) || User.IsInRole(WebSiteRole.Role_Admin))
                     {
                         <label asp-for="OrderHeader.Carrier">Carrier</label>
-                        <input asp-for="OrderHeader.Carrier" class="form-control" />
+                        <input id="OrderHeader_Carrier" asp-for="OrderHeader.Carrier" class="form-control" />
                     }
                     else
                     {
@@ -182,7 +182,7 @@
                     }
                     @if (Model.OrderHeader.OrderStatus == OrderStatus.StatusInProcess)
                     {
-                        <button asp-action="Shipped" type="submit" class="btn btn-info btn btn-block mb-2">
+                        <button onclick="return ValidateInput()" asp-action="Shipped" type="submit" class="btn btn-info btn btn-block mb-2">
                             Ship Order
                         </button>
                     }
@@ -207,3 +207,29 @@
         </div>
     </div>
 </form>
+
+@section scripts {
+    <script>
+        function ValidateInput() {
+            if (document.getElementById("OrderHeader_TrackingNumber").value == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Add Tracking Number Please'
+                });
+                return false;
+            }
+
+            if (document.getElementById("OrderHeader_Carrier").value == "") {
+                Swal.fire({
+                    icon: 'error',
+                    title'Oops...',
+                    text: 'Add Carrier Please'
+                });
+                return false
+            }
+            return true;
+        }
+
+    </script>
+}
