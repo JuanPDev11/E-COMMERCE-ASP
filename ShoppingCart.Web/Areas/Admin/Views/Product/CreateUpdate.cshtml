@@ -32,6 +32,13 @@
             <input type="file" id="ImageFile" name="file"  class="form-control" />           
         </div>
         <div class="row mb-3">
+            <label asp-for="Product.ArtistId "></label>
+            <select asp-for="Product.ArtistId" asp-items="@Model.Artists" class="form-control">
+                <option selected disabled>--Select Artist--</option>
+            </select>
+            <span asp-validation-for="Product.ArtistId" class="text-danger"></span>
+        </div>
+        <div class="row mb-3">
             <label asp-for="Product.CategoryId"></label>
             <select asp-for="Product.CategoryId" asp-items="@Model.Categories" class="form-control">
                 <option selected disabled>--Select Category--</option>

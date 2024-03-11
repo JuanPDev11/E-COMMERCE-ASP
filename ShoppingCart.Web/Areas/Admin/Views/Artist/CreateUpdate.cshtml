@@ -1,0 +1,74 @@
+﻿@model ShoppingCart.DataAccess.ViewModels.ArtistVM
+
+<form method="post" asp-action="CreateUpdate" enctype="multipart/form-data">
+    <input type="hidden" asp-for="ArtistData.ID" />
+    <input type="hidden" asp-for="ArtistData.ImageUrl" />
+    <img src="@Model.ArtistData.ImageUrl" width="120" height="120" />
+    <div>
+        <h2>@((Model.ArtistData == null || Model.ArtistData.ID == 0) ? "Create" : "Update") Artitst</h2>
+    </div>
+    <div asp-validation-summary="All"></div>
+    <div>
+        <label asp-for="ArtistData.Name"></label>
+        <input asp-for="ArtistData.Name" />
+        <span asp-validation-for="ArtistData.Name"></span>
+    </div>
+    <div>
+        <label asp-for="ArtistData.Description"></label>
+        <input asp-for="ArtistData.Description" />
+        <span asp-validation-for="ArtistData.Description"></span>
+    </div>
+    <div>
+        <label asp-for="ArtistData.ImageUrl"></label>
+        <input type="file" id="myFile" name="file"/>
+    </div>
+    <div>
+        <label asp-for="ArtistData.Age"></label>
+        <input asp-for="ArtistData.Age" />
+        <span asp-validation-for="ArtistData.Age"></span>
+    </div>
+    <div>
+        <label asp-for="ArtistData.Volume"></label>
+        <input asp-for="ArtistData.Volume" />
+        <span asp-validation-for="ArtistData.Volume"></span>
+    </div>
+    <div>
+        <label asp-for="ArtistData.Followers"></label>
+        <input asp-for="ArtistData.Followers" />
+        <span asp-validation-for="ArtistData.Followers"></span>
+    </div>
+    <div>
+        <label asp-for="ArtistData.TotalSold"></label>
+        <input asp-for="ArtistData.TotalSold" />
+        <span asp-validation-for="ArtistData.TotalSold"></span>
+    </div>
+    @if (Model.ArtistData == null || Model.ArtistData.ID == 0)
+    {
+        <button type="submit" onclick="return ValidateImage()">Create Artist</button>
+    }
+    else
+    {
+        <button type="submit" >Update Artist</button>
+    }
+    <a asp-action="Index" asp-controller="Artist" >Back to List</a>
+</form>
+
+@section scripts{
+    
+    @{
+        <partial name="_ValidationScriptsPartial" /> 
+        <script>
+            function ValidateImage() {
+                if (document.getElementById("myFile").value == "") {
+                    Swal.fire({
+                        title: 'Oops...',
+                        icon: 'error',
+                        text: 'Upload Image Please'
+                    });
+                    return false;
+                }
+                return true;
+            }
+        </script>
+    }
+}

@@ -1,0 +1,26 @@
+﻿@model ShoppingCart.DataAccess.ViewModels.ArtistVM
+
+<div>
+    <h2>List of Artist</h2>
+    <button>
+        <a asp-action="CreateUpdate" asp-controller="Artist" asp-area="Admin">Create artist</a>
+    </button>
+</div>
+<table id="myTableA" >
+    <thead>
+        <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Age</th>
+            <th>Volume</th>
+            <th>Followers</th>
+            <th>TotalSold</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+</table>
+
+@section scripts{
+    <script src="~/js/Artists.js"></script>
+}

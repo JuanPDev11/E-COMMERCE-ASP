@@ -25,7 +25,7 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
         #region APICALL
         public IActionResult AllProducts() 
         {
-            var products = _unitOfWork.Product.GetAll(includeProperties:"Category");
+            var products = _unitOfWork.Product.GetAll(includeProperties:"Category,ArtistData");
             return Json(new { data = products });
         }
         #endregion
@@ -51,6 +51,12 @@ namespace ShoppingCart.Web.Areas.Admin.Controllers
                 {
                     Text = x.Name,
                     Value = x.Id.ToString(),
+                }),
+                Artists = _unitOfWork.ArtistData.GetAll().Select(x=> 
+                new SelectListItem
+                {
+                    Text = x.Name,
+                    Value = x.ID.ToString()
                 })
             };
 
