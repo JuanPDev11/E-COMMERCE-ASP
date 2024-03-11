@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,5 +29,14 @@ namespace ShoppingCart.Models
 
         [ValidateNever]
         public Category Category { get; set; }
+
+        
+        public int ArtistId { get; set; }
+        [ValidateNever]
+        [ForeignKey("ArtistId")]
+        public ArtistData ArtistData { get; set; }
+
+        [Required]
+        public int Bid { get; set; }
     }
 }

@@ -26,6 +26,9 @@ namespace ShoppingCart.DataAccess.Repositories
                 productDB.Name = product.Name;
                 productDB.Description = product.Description;
                 productDB.Price = product.Price;
+                productDB.Bid = product.Bid;
+                productDB.CategoryId = product.CategoryId;
+                productDB.ArtistId = product.ArtistId;
                 if(productDB.ImageUrl != null)
                 {
                     productDB.ImageUrl = product.ImageUrl;

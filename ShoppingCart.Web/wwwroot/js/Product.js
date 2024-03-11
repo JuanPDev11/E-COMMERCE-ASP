@@ -6,6 +6,7 @@ $(document).ready(function () {
             { "data": "name" },
             { "data": "description" },
             { "data": "price" },
+            { "data": "artistData.name" },
             { "data": "category.name" },
             {
                 "data": "id",

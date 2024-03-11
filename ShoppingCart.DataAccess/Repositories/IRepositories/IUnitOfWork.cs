@@ -20,6 +20,8 @@ namespace ShoppingCart.DataAccess.Repositories.IRepositories
 
         IOrderDetailRepository OrderDetail { get; }
 
+        IArtistDataRepo ArtistData { get; }
+
         void Save();
     }
 }

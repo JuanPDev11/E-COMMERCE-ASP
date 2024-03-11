@@ -17,6 +17,7 @@ namespace ShoppingCart.DataAccess.Repositories
         public IApplicationUser ApplicationUser { get; private set; }
         public IOrderHeaderRepository OrderHeader { get; private set; }
         public IOrderDetailRepository OrderDetail { get; private set; }
+        public IArtistDataRepo ArtistData { get; private set; }
 
         public UnitOfWork(ApplicationDbContext context)
         {
@@ -27,6 +28,7 @@ namespace ShoppingCart.DataAccess.Repositories
             ApplicationUser = new ApplicationUserRepo(context);
             OrderHeader = new OrderHeaderRepository(context);
             OrderDetail = new OrderDetailRepository(context);
+            ArtistData = new ArtistDataRepo(context);
         }
 
         public void Save()
